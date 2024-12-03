@@ -14,10 +14,10 @@ ansi-styles@^4.0.0:
   dependencies:
     color-convert "^2.0.1"
 
-aoc-copilot@^1.5.10:
-  version "1.5.10"
-  resolved "https://registry.yarnpkg.com/aoc-copilot/-/aoc-copilot-1.5.10.tgz#8154c12904c489336e091fffd96e0a2fa65fd67f"
-  integrity sha512-+Hsei+QNAf2FTtr4hJ8KLlNv9frYxRGzfTqXFCF6o8k/p91umd17MbtmSwsNsntfT35oe8hTeArZElckLnX6gQ==
+aoc-copilot@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/aoc-copilot/-/aoc-copilot-1.6.0.tgz#81c2fee9d81b86cdd27ab11cae78e4ff38fca4b5"
+  integrity sha512-dlYtFsp2owBqAuLoBSuDwX0WcGJjl3WsOa3UXfvKI+7y/fBpsgUD5zRJRe4DMI+iWkEih58CkmWI+0T5T4ZffA==
   dependencies:
     cheerio "^1.0.0-rc.12"
     dotenv "^16.4.5"
