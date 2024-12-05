@@ -46,14 +46,17 @@ async function solve(
         return sum
     } else {
         let sum = 0
-        for (const s of updates) {
-            const half = (s.length - 1)/2
-            if(!isOrdered(s, rules)){
-                const rankedCandidates = s
+        for (const update of updates) {
+            const half = (update.length - 1)/2
+            if(!isOrdered(update, rules)){
+                const rankedCandidates = update
                     .filter(n => rules[n])
-                    .map(c => ({num: c,  rank: (rules[c]!.filter(n => s.includes(n)).length)}))
+                    .map(c => ({num: c,  rank: (rules[c]!.filter(n => update.includes(n)).length)}))
 
-                const sorted = rankedCandidates.sort((a, b) => b.rank! - a.rank!).map(n => n.num)
+                const sorted = rankedCandidates
+                    .sort((a, b) => b.rank! - a.rank!)
+                    .map(n => n.num)
+
                 sum += sorted[half]
             }
         }
