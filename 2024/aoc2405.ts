@@ -29,7 +29,6 @@ async function solve(
             const [n1, n2] = input.split("|").map(n => Number(n))
             if (rules[n1]) {
                 rules[n1].push(n2);
-                rules[n1] = rules[n1];
             } else {
                 rules[n1] = [n2];
             }
