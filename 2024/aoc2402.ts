@@ -1,5 +1,5 @@
 import { run } from 'aoc-copilot';
-import {arrayEquals, removeItem} from "./helpers";
+import {arrayEquals, removeItem} from "./array";
 
 function isSafe(rapport:number[]) {
     let before = Array.from(rapport)
