@@ -1,7 +1,6 @@
 import { expect, test } from "vitest"
-import {calculate} from "../solutions/aoc2407";
-import {combine} from "../../utils/div";
-import {extrapolate, extrapolateAll, findAntinodes, parseDay8} from "../solutions/aoc2408";
+import {extrapolate} from "../../utils/position";
+import {findAntinodes, parseDay8} from "../solutions/aoc2408";
 
 test("extrapolated1", () => {
     const p1 = {x:3, y:0}
