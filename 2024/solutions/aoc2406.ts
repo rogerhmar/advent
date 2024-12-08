@@ -1,5 +1,5 @@
 import { run } from 'aoc-copilot';
-import {equal, isOutside, Position} from "../utils/position";
+import {equal, isOutside, Position} from "../../utils/position";
 
 type Direction = "up" | "down" | "right" | "left";
 type State = {position: Position, direction: Direction };

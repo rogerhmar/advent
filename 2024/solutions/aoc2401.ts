@@ -1,5 +1,5 @@
 import { run } from 'aoc-copilot';
-import {arrCount} from "../utils/array";
+import {arrCount} from "../../utils/array";
 
 export function SplitInArrays(inputs: string[], splitBy: string) {
     let x1 = []

@@ -1,5 +1,5 @@
 import { run } from 'aoc-copilot';
-import {combine} from "../utils/div";
+import {combine} from "../../utils/div";
 
 type CombinationsObject =  {[p: number]: string[][]};
 type Equation = { input: number[]; test: number };
