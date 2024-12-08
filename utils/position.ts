@@ -1,12 +1,6 @@
 export type Position = { x: number; y: number };
 
-export function isOutside<T>(position: Position, inputs: readonly T[][]) {
-    const xlen = inputs[0].length
-    const ylen = inputs.length
-    return  position.x >= xlen || position.y >= ylen || position.y < 0 || position.x < 0
-}
-
-export function isOutsideStr(position: Position, inputs: string []) {
+export function isOutside<T>(position: Position, inputs: string [] | readonly T[][]) {
     const xlen = inputs[0].length
     const ylen = inputs.length
     return  position.x >= xlen || position.y >= ylen || position.y < 0 || position.x < 0

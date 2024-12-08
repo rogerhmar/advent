@@ -1,5 +1,5 @@
 import { run } from 'aoc-copilot';
-import {equal, extrapolate, extrapolateAll, isOutsideStr, Position} from "../../utils/position";
+import {equal, extrapolate, extrapolateAll, isOutside, Position} from "../../utils/position";
 
 export type Antenna = {
     pos: Position,
@@ -16,14 +16,14 @@ export function findAntinodes(antennas: Antenna[], inputs: string[], part: numbe
             if(a.v != b.v) {
                 continue
             }
-            let isOut = (p: Position) => isOutsideStr(p, inputs)
+            let isOut = (p: Position) => isOutside(p, inputs)
             let candidate = part == 1 ? extrapolate(a.pos, b.pos) : extrapolateAll(a.pos, b.pos, isOut)
             for (const position of candidate) {
                 const overlap  = antennas.filter(p => p.pos == position)
                 if(overlap.length != 0) {
                     continue
                 }
-                if(isOutsideStr(position,inputs)) {
+                if(isOutside(position,inputs)) {
                     continue
                 }
                 if(!antinodes.has(JSON.stringify(position))) {
