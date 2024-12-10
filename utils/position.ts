@@ -6,6 +6,13 @@ export function isOutside<T>(position: Position, inputs: string [] | readonly T[
     return  position.x >= xlen || position.y >= ylen || position.y < 0 || position.x < 0
 }
 
+export function getDiff(from: Position, to: Position, inputs: number[][]) {
+    if (inputs[to.y][to.x] == undefined || inputs[from.y][from.x] == undefined) {
+        return -1
+    }
+    return inputs[to.y][to.x] - inputs[from.y][from.x];
+}
+
 export function equal(pos1?: Position, pos2?: Position)  {
     if(!pos2)
         return false
