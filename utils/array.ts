@@ -11,3 +11,7 @@ export function arrayEquals<T>(a:T[], b:T[]) {
 export function removeItem<T>(arr: Array<T>, index: number): Array<T> {
     return [...arr.slice(0, index), ...arr.slice(index+1)]
 }
+
+export function sum(arr: number[]) {
+    return arr.reduce((acc,num) => acc + num, 0)
+}
