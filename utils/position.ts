@@ -52,3 +52,19 @@ export function extrapolateAll(p1: Position, p2: Position, isOut: (p: Position) 
         i++
     }
 }
+
+export function getLengths(map: (number[][] | string[])) {
+    const ylen = map.length
+    const xlen = map[0].length
+    return{xlen, ylen}
+}
+
+export function* makePositionIterator(map: (number[][] | string[])): Generator<Position> {
+    const ylen = map.length
+    const xlen = map[0].length
+    for (let y = 0; y < ylen; y++) {
+        for (let x = 0; x < xlen; x++) {
+            yield {x,y}
+        }
+    }
+}

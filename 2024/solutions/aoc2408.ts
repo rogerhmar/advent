@@ -1,5 +1,5 @@
 import { run } from 'aoc-copilot';
-import {equal, extrapolate, extrapolateAll, isOutside, Position} from "../../utils/position";
+import {equal, extrapolate, extrapolateAll, isOutside, makePositionIterator, Position} from "../../utils/position";
 
 export type Antenna = {
     pos: Position,
@@ -36,14 +36,10 @@ export function findAntinodes(antennas: Antenna[], inputs: string[], part: numbe
 }
 
 export function parseDay8(inputs: string[]): Antenna[] {
-    const ylen = inputs.length
-    const xlen = inputs[0].length
     let antennas: Antenna[] = []
-    for (let y = 0; y < ylen; y++) {
-        for (let x= 0; x < xlen; x++) {
-            if (inputs[y][x] != ".") {
-                antennas.push({pos:{x,y},v:inputs[y][x]});
-            }
+    for (const {x,y} of makePositionIterator(inputs)) {
+        if (inputs[y][x] != ".") {
+            antennas.push({pos: {x, y}, v: inputs[y][x]});
         }
     }
     return antennas

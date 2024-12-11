@@ -12,6 +12,6 @@ export function combine(values: string[], length: number): string[][] {
     }
 }
 
-export function InputAsNumbers(inputs: string[]) {
+export function InputAsNumbers(inputs: string[]): number[][] {
     return inputs.map(i => Array.from(i).map(n => Number(n)))
 }

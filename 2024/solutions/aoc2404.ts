@@ -1,4 +1,5 @@
 import { run } from 'aoc-copilot';
+import {getLengths, makePositionIterator} from "../../utils/position";
 
 function findWords(inputs: string[], x: number, y: number, word: string) {
     const xlen = inputs[0].length;
@@ -31,44 +32,39 @@ function findWords(inputs: string[], x: number, y: number, word: string) {
 async function solve(
     inputs: string[], // Contents of the example or actual inputs
     part: number,     // Indicates whether the solver is being called for part 1 or 2 of the puzzle
-    test: boolean,    // Indicates whether the solver is being run for an example or actual input
-    additionalInfo?: { [key: string]: string } // Additional info for some puzzles with multiple examples
 ): Promise<number | string> {
     let sum = 0
-    const xlen = inputs[0].length;
-    const ylen = inputs.length;
-    for (let y = 0; y < ylen; y++) {
-        for (let x = 0; x < xlen; x++) {
-            if(part == 1) {
-                const word = "XMAS"
-                if(inputs[y][x] === word[0]) {
-                    sum+=findWords(inputs, x, y, word).filter(n => n).length
+    const {xlen, ylen} = getLengths(inputs);
+    const positions = makePositionIterator(inputs)
+    for (const {x,y} of positions) {
+        if (part == 1) {
+            const word = "XMAS"
+            if (inputs[y][x] === word[0]) {
+                sum += findWords(inputs, x, y, word).filter(n => n).length
+            }
+        }
+        if (part == 2) {
+            if (inputs[y][x] === 'A' && y > 0 && y + 1 < ylen && x + 1 < xlen && x > 0) {
+                // 3x3 around the A
+                let candidate = [
+                    inputs[y - 1][x - 1] + inputs[y - 1][x] + inputs[y - 1][x + 1],
+                    inputs[y][x - 1] + inputs[y][x] + inputs[y][x + 1],
+                    inputs[y + 1][x - 1] + inputs[y + 1][x] + inputs[y + 1][x + 1]
+                ]
+
+                const word = "MAS"
+                const topL = findWords(candidate, 0, 0, word)
+                const bottomR = findWords(candidate, 2, 2, word)
+                const topR = findWords(candidate, 2, 0, word)
+                const bottomL = findWords(candidate, 0, 2, word)
+
+                const isSolution1 = topL[idx.downright] && (topR[idx.downleft] || bottomL[idx.upright])
+                const isSolution2 = bottomR[idx.upleft] && (topR[idx.downleft] || bottomL[idx.upright])
+
+                if (isSolution1 || isSolution2) {
+                    sum++
                 }
             }
-            if(part == 2) {
-                if(inputs[y][x] === 'A' && y > 0 && y + 1 < ylen && x + 1 < xlen && x > 0) {
-                    // 3x3 around the A
-                    let candidate = [
-                            inputs[y-1][x-1]+inputs[y-1][x]+inputs[y-1][x+1],
-                            inputs[y][x-1]+inputs[y][x]+ inputs[y][x+1],
-                            inputs[y+1][x-1]+inputs[y+1][x]+inputs[y+1][x+1]
-                    ]
-
-                    const word = "MAS"
-                    const topL = findWords(candidate, 0, 0, word)
-                    const bottomR  = findWords(candidate, 2, 2, word)
-                    const topR = findWords(candidate, 2, 0, word)
-                    const bottomL  = findWords(candidate, 0, 2, word)
-
-                    const isSolution1 = topL[idx.downright] && (topR[idx.downleft]  || bottomL[idx.upright])
-                    const isSolution2  = bottomR[idx.upleft] && (topR[idx.downleft]  || bottomL[idx.upright])
-
-                    if(isSolution1 || isSolution2) {
-                        sum++
-                    }
-                }
-            }
-
         }
     }
     return sum;

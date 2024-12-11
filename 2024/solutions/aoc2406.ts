@@ -1,5 +1,5 @@
 import { run } from 'aoc-copilot';
-import {equal, isOutside, Position} from "../../utils/position";
+import {equal, getLengths, isOutside, makePositionIterator, Position} from "../../utils/position";
 
 type Direction = "up" | "down" | "right" | "left";
 type State = {position: Position, direction: Direction };
@@ -72,8 +72,6 @@ async function solve(
     const inputArray = Object.freeze(inputs.map(i => Array.from(i)))
     const state = Object.freeze(getState(inputArray));
     const startPosition = state.position
-    const xLen = inputArray.length
-    const yLen = inputArray.length
 
     if (part == 1) {
         let visited = getAllVisited(state, inputArray);
@@ -81,18 +79,16 @@ async function solve(
     } else {
         let loops = 0
         let test = Array.from(inputArray.map(i => Array.from(i)))
-        for (let y = 0; y < yLen; y++) {
-            for (let x = 0; x < xLen; x++) {
-                if (equal(startPosition, {x,y})) {
-                    continue
-                }
-                test[y][x] = "#" // Set
-                let visited = getAllVisited(state, test);
-                if (visited.loop) {
-                    loops++
-                }
-                test[y][x] = inputs[y][x] // Reset
+        for (const {x, y} of makePositionIterator(inputs)) {
+            if (equal(startPosition, {x, y})) {
+                continue
             }
+            test[y][x] = "#" // Set
+            let visited = getAllVisited(state, test);
+            if (visited.loop) {
+                loops++
+            }
+            test[y][x] = inputs[y][x] // Reset
         }
         return loops;
     }

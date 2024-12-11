@@ -1,6 +1,7 @@
 import {run} from "aoc-copilot";
-import {getDiff, isOutside, Position} from "../../utils/position";
+import {getDiff, isOutside, makePositionIterator, Position} from "../../utils/position";
 import {InputAsNumbers} from "../../utils/div";
+import {sum} from "../../utils/array";
 
 function getCandidates(from: Position, map: number[][]) {
     const candidates: Position[] = []
@@ -43,20 +44,13 @@ export function getNumberOfPaths(trailhead: Position, map: number[][], distinct:
 }
 
 export function getTrailheads(map: number[][]) {
-    let trailheads = []
-    for (let y = 0; y < map.length; y++) {
-        for (let x = 0; x < map.length; x++) {
-            if (map[y][x] == 0) {
-                trailheads.push({x, y});
-            }
-        }
-    }
-    return trailheads
+   return  Array.from(makePositionIterator(map)).filter(m => map[m.y][m.x] == 0)
 }
 
 export function solveDay10(inputs: string[], distict: boolean) {
     let map = InputAsNumbers(inputs);
-    return getTrailheads(map).reduce((sum, trailhead) => sum +  getNumberOfPaths(trailhead, map, distict), 0)
+    const pathCounts = getTrailheads(map).map(trailhead => getNumberOfPaths(trailhead, map, distict))
+    return sum(pathCounts)
 }
 
 async function solve(
