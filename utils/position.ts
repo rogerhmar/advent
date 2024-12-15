@@ -59,7 +59,7 @@ export function getLengths(map: (number[][] | string[])) {
     return{xlen, ylen}
 }
 
-export function* makePositionIterator(map: (number[][] | string[])): Generator<Position> {
+export function* makePositionIterator(map: (number[][] | string[] | string[][] )): Generator<Position> {
     const ylen = map.length
     const xlen = map[0].length
     for (let y = 0; y < ylen; y++) {
